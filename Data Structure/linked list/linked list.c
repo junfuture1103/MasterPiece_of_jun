@@ -21,6 +21,14 @@ void insert_node(node** phead, node* p, node* new_node) {
 	return;
 }
 
+void delete_node(node** phead, node* before, node* p) {
+	node* tmp = p->link;
+	before->link = tmp;
+	free(p);
+	return;
+
+}
+
 int main() {
 	node* tmp = new_node();
 	node* head = tmp;
@@ -85,6 +93,24 @@ int main() {
 	}
 	printf("NULL");
 
+	//delete value
+	printf("\n\nGet me delete value : ");
+	if (!scanf("%d", &input)) exit(1);
 
+	node* before;
+
+	while (tmp->link != NULL) {
+		before = tmp;
+		tmp = tmp->link;
+		if (tmp->data == input) break;
+	}
+
+	delete_node(&head, before, tmp);
+
+	while (temp->link != NULL) {
+		temp = temp->link;
+		printf("%d -> ", temp->data);
+	}
+	printf("NULL");
 	return 0;
 }
